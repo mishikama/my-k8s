@@ -1,0 +1,26 @@
+
+# system files
+**/*.log
+
+**/.DS_Store
+**/.Trash-*
+
+# terraform files
+**/.terraform/*
+
+*.tfstate
+*.tfstate.*
+
+**/*.tfvars
+**/*.tfvars.json
+
+**/override.tf
+**/override.tf.json
+**/*_override.tf
+**/*_override.tf.json
+
+**/.terraform.tfstate.lock.info
+**/.terraform.lock.hcl
+
+**/.terraformrc
+**/terraform.rc
