@@ -1,0 +1,3 @@
+defaultImage: mishila/mylab-ruby-app
+defaultImageTag: latest
+defaultImagePullPolicy: Always
