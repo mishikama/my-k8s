@@ -1,0 +1,21 @@
+deployments:
+  web-app:
+    replicas: 1
+    labels:
+      app: web-app
+    podLabels:
+      app: web-app
+    containers:
+      - name: web-app
+        image: mishila/mylab-ruby-app
+        tag: latest
+        ports:
+          - containerPort: 3000
+
+services:
+  web-app:
+    type: ClusterIP
+    ports:
+      - name: http
+        protocol: TCP
+        port: 3000
