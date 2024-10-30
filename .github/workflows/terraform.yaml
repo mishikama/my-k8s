@@ -1,0 +1,63 @@
+name: "Terraform"
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: Yandex-cloud
+    env:
+      YC_CLOUD_ID: ${{ secrets.YC_CLOUD_ID }}
+      YC_FOLDER_ID: ${{ secrets.YC_FOLDER_ID }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: IAM Token
+        id: issue-iam-token
+        uses: yc-actions/yc-iam-token@v1
+        with:
+          yc-sa-json-credentials: ${{ secrets.YC_SA_JSON_CREDENTIALS }}
+
+      - name: Setup terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: ${{ env.terraform_version }}
+
+      - name: Terraform fmt
+        id: fmt
+        run: terraform fmt -check
+        continue-on-error: true
+
+      - name: Terraform Init
+        id: init
+        env:
+          YC_TOKEN: ${{ steps.issue-iam-token.outputs.token }}
+          ACCESS_KEY: ${{ secrets.YC_KEY_ID }}
+          SECRET_KEY: ${{ secrets.YC_PRIVATE_KEY }}
+          BUCKET_NAME: ${{ secrets.YC_BUCKET_NAME }}
+        run: terraform init -backend-config="access_key=$ACCESS_KEY" -backend-config="secret_key=$SECRET_KEY" -backend-config="bucket=$BUCKET_NAME"
+
+      - name: Terraform Validate
+        id: validate
+        run: terraform validate -no-color
+
+      - name: Terraform Plan
+        env:
+          YC_TOKEN: ${{ steps.issue-iam-token.outputs.token }}
+        if: github.event_name == 'pull_request'
+        id: plan
+        run: terraform plan
+        continue-on-error: true
+
+      - name: Terraform Apply
+        env:
+          YC_TOKEN: ${{ steps.issue-iam-token.outputs.token }}
+        # if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        if: false
+        run: terraform apply -auto-approve -input=false

@@ -49,6 +49,6 @@ module "kube" {
 
 resource "helm_release" "flux" {
   name       = "flux-operator"
-  repository = "https://bsgrigorov.github.io/helm-operator/"
-  chart      = "helm-operator"
+  repository = "oci://ghcr.io/controlplaneio-fluxcd/charts/"
+  chart      = "flux-operator"
 }
