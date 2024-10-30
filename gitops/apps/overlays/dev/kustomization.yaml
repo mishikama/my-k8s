@@ -4,3 +4,4 @@ namespace: dev
 resources:
   - namespace.yaml
   - ruby-app/ks.yaml
+  - postgres/ks.yaml
