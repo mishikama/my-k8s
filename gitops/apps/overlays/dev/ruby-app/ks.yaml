@@ -1,4 +1,4 @@
-apiVersion: ktustomize.oolkit.fluxcd.io/v1
+apiVersion: ktustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
   name: &app ruby-app
