@@ -3,6 +3,7 @@ kind: Kustomization
 namespace: ruby-app
 resources:
   - helmrelease.yaml
+  - repository.yaml
 configMapGenerator:
   - name: ruby-app-values
     files:
