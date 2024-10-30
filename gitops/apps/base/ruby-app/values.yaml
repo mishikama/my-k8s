@@ -12,7 +12,7 @@ deployments:
         imagePullPolicy: Always
         env:
           - name: DB_HOST
-            value: my-release-postgresql
+            value: postgresql
           - name: DB_PORT
             value: "5432"
           - name: DB_USERNAME
