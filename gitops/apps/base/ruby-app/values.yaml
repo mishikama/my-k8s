@@ -12,16 +12,16 @@ deployments:
         imagePullPolicy: Always
         env:
           - name: DB_HOST
-            values: my-release-postgresql
+            value: my-release-postgresql
           - name: DB_PORT
-            values: 5432
+            value: "5432"
           - name: DB_USERNAME
-            values: postgres
+            value: postgres
           - name: DB_PASSWORD
-            valuesFrom:
+            valueFrom:
               secretKeyRef:
                 name: my-release-postgresql
-                password: postgres-password
+                key: postgres-password
         ports:
           - containerPort: 3000
 
