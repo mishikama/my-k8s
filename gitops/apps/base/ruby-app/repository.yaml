@@ -3,5 +3,5 @@ kind: HelmRepository
 metadata:
   name: nxs-universal-chart
 spec:
-  interval: 1h
+  interval: 5m
   url: https://evgkrsk.github.io/nxs-universal-chart
