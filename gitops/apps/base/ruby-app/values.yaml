@@ -8,7 +8,20 @@ deployments:
     containers:
       - name: web-app
         image: mishila/mylab-ruby-app
-        tag: latest
+        imageTag: latest
+        imagePullPolicy: Always
+        env:
+          - name: DB_HOST
+            values: my-release-postgresql
+          - name: DB_PORT
+            values: 5432
+          - name: DB_USERNAME
+            values: postgres
+          - name: DB_PASSWORD
+            valuesFrom:
+              secretKeyRef:
+                name: my-release-postgresql
+                password: postgres-password
         ports:
           - containerPort: 3000
 
