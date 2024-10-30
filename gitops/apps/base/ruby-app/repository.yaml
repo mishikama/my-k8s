@@ -1,0 +1,7 @@
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: Nixys-universal
+spec:
+  interval: 1h
+  url: https://evgkrsk.github.io/nxs-universal-chart
