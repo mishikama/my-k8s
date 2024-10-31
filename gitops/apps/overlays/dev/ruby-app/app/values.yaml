@@ -1,1 +1,7 @@
-a: b
+ingresses:
+  nixys.io:
+    hosts:
+      - paths:
+          - serviceName: web-app
+            servicePort: 3000
+        hostname: nixys.io.example
