@@ -17,11 +17,11 @@ deployments:
             value: "5432"
           - name: DB_USERNAME
             value: postgres
-          - name: DB_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: my-release-postgresql
-                key: postgres-password
+          # - name: DB_PASSWORD
+          #   valueFrom:
+          #     secretKeyRef:
+          #       name: my-release-postgresql
+          #       key: postgres-password
         ports:
           - containerPort: 3000
 
