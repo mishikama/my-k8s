@@ -1,0 +1,9 @@
+ingresses:
+  dev.example.com:
+    certManager:
+      issuerType: cluster-issuer
+      issuerName: letsencrypt
+  hosts:
+    - paths:
+        - serviceName: web-app
+          servicePort: 3000
