@@ -1,5 +1,0 @@
-# ingresses:
-#   ruby-dev.myhost.ru:
-#     hosts:
-#       - serviceName: web-app
-#         servicePort: 3000
