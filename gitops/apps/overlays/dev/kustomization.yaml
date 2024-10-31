@@ -3,5 +3,5 @@ kind: Kustomization
 namespace: dev
 resources:
   - namespace.yaml
-  - ruby-app/ks.yaml
-  - postgres/ks.yaml
+  - ruby-app/fks.yaml
+  - postgres/fks.yaml
