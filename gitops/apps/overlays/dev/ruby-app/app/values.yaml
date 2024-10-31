@@ -1,7 +1,8 @@
 ingresses:
-  nixys.io:
+  84.252.135.17.nip.io:
+    ingressClassName: nginx
     hosts:
       - paths:
           - serviceName: web-app
             servicePort: 3000
-        hostname: nixys.io.example
+        hostname: 84.252.135.17.nip.io
