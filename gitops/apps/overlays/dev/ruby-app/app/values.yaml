@@ -6,6 +6,5 @@ ingresses:
     ingressClassName: nginx
     hosts:
     - paths:
-      - pathType: Prefix
         serviceName: web-app
         servicePort: 3000
