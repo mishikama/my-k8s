@@ -1,8 +1,8 @@
 ingresses:
-  84.252.135.17.nip.io:
-    ingressClassName: nginx
+  universal:
     hosts:
-      - paths:
-          - serviceName: web-app
-            servicePort: 3000
-        hostname: 84.252.135.17.nip.io
+    - hostname: "*"
+      paths:
+      - path: /
+        serviceName: web-app
+        servicePort: 3000
