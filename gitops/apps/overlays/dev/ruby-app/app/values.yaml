@@ -1,12 +1,11 @@
 ingresses:
-  ruby-app-dev:
+  "*":
     certManager:
       issuerType: cluster-issuer
       issuerName: letsencrypt
     ingressClassName: nginx
     hosts:
-    - hostname: "*"
-      paths:
+    - paths:
       - pathType: Prefix
         serviceName: web-app
         servicePort: 3000
