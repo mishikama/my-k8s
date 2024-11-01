@@ -1,8 +1,10 @@
 ingresses:
-  universal:
+  any:
+    ingressClassName: nginx
     hosts:
-    - hostname: "*"
-      paths:
-      - path: /
-        serviceName: web-app
-        servicePort: 3000
+      - hostname: "*"
+        paths:
+          - path: "/"
+            pathType: Prefix
+            serviceName: web-app
+            servicePort: 3000
