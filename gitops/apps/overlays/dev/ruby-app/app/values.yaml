@@ -8,3 +8,4 @@ ingresses:
       - paths:
           - serviceName: web-app
             servicePort: 3000
+            path: "/"
