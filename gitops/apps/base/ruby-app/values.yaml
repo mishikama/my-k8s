@@ -10,7 +10,8 @@ secretEnvs:
 hooks:
   migrate:
     - name: migrate
-      command: bin/rails
+      command:
+        - bin/rails
       args:
         - db:setup
         - db:migrate
