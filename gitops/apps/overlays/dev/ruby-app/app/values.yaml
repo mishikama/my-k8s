@@ -1,10 +1,10 @@
-ingresses:
-  130.193.44.115.nip.io:
-    certManager:
-      issuerType: cluster-issuer
-      issuerName: letsencrypt
-    ingressClassName: nginx
-    hosts:
-      - paths:
-          serviceName: web-app
-          servicePort: 3000
+# ingresses:
+#   130.193.44.115.nip.io:
+#     certManager:
+#       issuerType: cluster-issuer
+#       issuerName: letsencrypt
+#     ingressClassName: nginx
+#     hosts:
+#       - paths:
+#           serviceName: web-app
+#           servicePort: 3000
