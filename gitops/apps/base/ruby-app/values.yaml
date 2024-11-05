@@ -8,7 +8,7 @@ deployments:
     containers:
       - name: web-app
         image: mishila/mylab-ruby-app
-        imageTag: sha-04c2546
+        imageTag: sha-9a4c7ec
         imagePullPolicy: Always
         env:
           - name: DB_HOST
@@ -22,6 +22,8 @@ deployments:
               secretKeyRef:
                 name: postgres-postgresql
                 key: postgres-password
+          - name: ALLOWED_HOST
+            value: ".nip.io"
         ports:
           - containerPort: 3000
 

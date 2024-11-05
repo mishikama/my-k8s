@@ -1,3 +1,9 @@
+deployments:
+  web-app:
+    env:
+      - name: ALLOWED_HOST
+        value: ".nip.io"
+
 ingresses:
   130.193.44.115.nip.io:
     certManager:
