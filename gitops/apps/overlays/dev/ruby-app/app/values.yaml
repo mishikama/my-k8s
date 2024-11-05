@@ -1,8 +1,8 @@
 deployments:
   web-app:
     env:
-      - name: ALLOWED_HOST
-        value: ".nip.io"
+      - name: RB_ALLOWED_HOST
+        value: "130.193.44.115.nip.io"
 
 ingresses:
   130.193.44.115.nip.io:
