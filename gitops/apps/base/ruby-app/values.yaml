@@ -22,6 +22,8 @@ deployments:
         env:
           envConfigmaps:
             - envs
+          envsFromSecret:
+            - secretEnvs
         ports:
           - containerPort: 3000
 
