@@ -7,6 +7,18 @@ envs:
 secretEnvs:
   postgres-postgresql: postgres-password
 
+hooks:
+  migrate:
+    - name: migrate
+      command: bin/rails
+      args:
+        - db:setup
+        - db:migrate
+      envConfigmaps:
+        - envs
+      envSecrets:
+        - secretEnvs
+
 deployments:
   web-app:
     replicas: 1
