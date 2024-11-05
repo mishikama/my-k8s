@@ -5,9 +5,6 @@ ingresses:
       issuerName: letsencrypt
     ingressClassName: nginx
     hosts:
-      - hostname: 130.193.44.115.nip.io
-        paths:
-          path: "/"
-          pathType: Prefix
-          serviceName: web-app
-          servicePort: 3000
+      - paths:
+          - serviceName: web-app
+            servicePort: 3000
