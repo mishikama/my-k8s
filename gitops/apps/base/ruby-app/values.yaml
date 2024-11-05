@@ -22,7 +22,7 @@ deployments:
               secretKeyRef:
                 name: postgres-postgresql
                 key: postgres-password
-          - name: ALLOWED_HOST
+          - name: RB_ALLOWED_HOST
             value: ".nip.io"
         ports:
           - containerPort: 3000
