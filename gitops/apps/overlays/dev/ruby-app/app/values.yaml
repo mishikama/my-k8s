@@ -1,3 +1,12 @@
+deployments:
+  web-app:
+    replicas: 1
+    containers:
+      - name: web-app
+        env:
+          - name: RAILS_DEVELOPMENT_HOSTS
+            value: "130.193.44.115.nip.io"
+
 ingresses:
   130.193.44.115.nip.io:
     certManager:
