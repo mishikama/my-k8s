@@ -22,6 +22,8 @@ deployments:
               secretKeyRef:
                 name: postgres-postgresql
                 key: postgres-password
+          - name: RAILS_DEVELOPMENT_HOSTS
+            value: "130.193.44.115.nip.io"
         ports:
           - containerPort: 3000
 
