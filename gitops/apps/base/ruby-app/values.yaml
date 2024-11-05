@@ -1,3 +1,12 @@
+envs:
+  DB_HOST: postgres-postgresql
+  DB_PORT: "5432"
+  DB_USERNAME: postgres
+  name: DB_PASSWORD
+
+secretEnvs:
+  postgres-postgresql: postgres-password
+
 deployments:
   web-app:
     replicas: 1
@@ -10,20 +19,8 @@ deployments:
         image: mishila/mylab-ruby-app
         imageTag: latest
         imagePullPolicy: Always
-        env:
-          - name: DB_HOST
-            value: postgres-postgresql
-          - name: DB_PORT
-            value: "5432"
-          - name: DB_USERNAME
-            value: postgres
-          - name: DB_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: postgres-postgresql
-                key: postgres-password
-          - name: RAILS_DEVELOPMENT_HOSTS
-            value: "130.193.44.115.nip.io"
+        envConfigmaps:
+          - envs
         ports:
           - containerPort: 3000
 

@@ -1,11 +1,14 @@
+envs:
+  RAILS_DEVELOPMENT_HOSTS: "130.193.44.115.nip.io"
+
 deployments:
   web-app:
     replicas: 1
     containers:
       - name: web-app
         env:
-          - name: RAILS_DEVELOPMENT_HOSTS
-            value: "130.193.44.115.nip.io"
+          envConfigmaps:
+            - envs
 
 ingresses:
   130.193.44.115.nip.io:
