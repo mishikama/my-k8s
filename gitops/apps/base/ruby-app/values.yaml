@@ -19,8 +19,9 @@ deployments:
         image: mishila/mylab-ruby-app
         imageTag: latest
         imagePullPolicy: Always
-        envConfigmaps:
-          - envs
+        env:
+          envConfigmaps:
+            - envs
         ports:
           - containerPort: 3000
 
