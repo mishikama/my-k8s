@@ -8,7 +8,7 @@ deployments:
     containers:
       - name: web-app
         image: mishila/mylab-ruby-app
-        imageTag: sha-14cfadb
+        imageTag: latest
         imagePullPolicy: Always
         env:
           - name: DB_HOST

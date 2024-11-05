@@ -1,8 +1,11 @@
 deployments:
   web-app:
-    env:
-      - name: RB_ALLOWED_HOST
-        value: "130.193.44.115.nip.io"
+    containers:
+      - name: web-app
+        imageTag: sha-94a95a2
+        env:
+          - name: RAILS_DEVELOPMENT_HOSTS
+            value: "130.193.44.115.nip.io"
 
 ingresses:
   130.193.44.115.nip.io:
