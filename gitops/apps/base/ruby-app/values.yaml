@@ -23,9 +23,12 @@ deployments:
       - name: web-app
         envConfigmaps:
           - envs
-        envFrom:
-          - secretKeyRef:
-            name: postgres-postgresql
+        env:
+          DB_PASSWORD:
+            valueFrom:
+              secretKeyRef:
+                name: postgres-postgresql
+                key: postgres-password
         ports:
           - containerPort: 3000
 
