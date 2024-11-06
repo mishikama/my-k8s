@@ -10,15 +10,16 @@ secretEnvs:
 hooks:
   migrate:
     - name: migrate
-      command:
-        - bin/rails
-      args:
-        - db:setup
-        - db:migrate
-      envConfigmaps:
-        - envs
-      envSecrets:
-        - secretEnvs
+      containers:
+        command:
+          - bin/rails
+        args:
+          - db:setup
+          - db:migrate
+        envConfigmaps:
+          - envs
+        envSecrets:
+          - secretEnvs
 
 deployments:
   web-app:
