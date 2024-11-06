@@ -24,7 +24,7 @@ deployments:
         envConfigmaps:
           - envs
         env:
-          DB_PASSWORD:
+          - name: DB_PASSWORD
             valueFrom:
               secretKeyRef:
                 name: postgres-postgresql
