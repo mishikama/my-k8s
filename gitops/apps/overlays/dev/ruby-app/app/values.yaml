@@ -1,9 +1,9 @@
 envs:
-  RAILS_DEVELOPMENT_HOSTS: "130.193.44.115.nip.io"
+  RAILS_DEVELOPMENT_HOSTS: "51.250.34.111.ip.io"
 
 deployments:
   web-app:
-    replicas: 1
+    replicas: 2
     containers:
       - name: web-app
         env:
@@ -11,7 +11,7 @@ deployments:
             - envs
 
 ingresses:
-  130.193.44.115.nip.io:
+  51.250.34.111.ip.io:
     certManager:
       issuerType: cluster-issuer
       issuerName: letsencrypt
