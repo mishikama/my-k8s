@@ -6,12 +6,6 @@ deployments:
     replicas: 2
     containers:
       - name: web-app
-        env:
-          - name: DB_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: postgres-postgresql
-                key: postgres-password
         envConfigmaps:
           - envs
 
