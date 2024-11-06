@@ -4,10 +4,6 @@ envs:
 deployments:
   web-app:
     replicas: 2
-    containers:
-      - name: web-app
-        envConfigmaps:
-          - envs
 
 ingresses:
   51.250.34.111.nip.io:
