@@ -5,6 +5,7 @@ envs:
 
 defaultImage: mishila/mylab-ruby-app
 defaultImageTag: latest
+defaultImagePullPolicy: Always
 
 deployments:
   web-app:
@@ -15,12 +16,6 @@ deployments:
       app: web-app
     containers:
       - name: web-app
-        imagePullPolicy: Always
-        env:
-          valueFrom:
-            secretKeyRef:
-              name: postgres-postgresql
-              key: postgres-password
         envConfigmaps:
           - envs
         ports:
