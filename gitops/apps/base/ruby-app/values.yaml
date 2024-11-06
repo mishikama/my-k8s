@@ -3,8 +3,8 @@ envs:
   DB_PORT: "5432"
   DB_USERNAME: postgres
 
-secretEnvs:
-  postgres-postgresql: postgres-password
+# secretEnvs:
+#   postgres-postgresql: postgres-password
 
 defaultImage: mishila/mylab-ruby-app
 defaultImageTag: latest
@@ -19,11 +19,8 @@ deployments:
     containers:
       - name: web-app
         imagePullPolicy: Always
-        env:
-          envConfigmaps:
-            - envs
-          envsFromSecret:
-            - secretEnvs
+        envConfigmaps:
+          - envs
         ports:
           - containerPort: 3000
 

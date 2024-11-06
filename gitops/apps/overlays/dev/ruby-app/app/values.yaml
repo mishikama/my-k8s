@@ -6,9 +6,8 @@ deployments:
     replicas: 2
     containers:
       - name: web-app
-        env:
-          envConfigmaps:
-            - envs
+        envConfigmaps:
+          - envs
 
 ingresses:
   51.250.34.111.ip.io:
