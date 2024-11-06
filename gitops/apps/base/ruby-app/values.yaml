@@ -20,7 +20,7 @@ deployments:
         imageTag: latest
         imagePullPolicy: Always
         env:
-          envFromConfigmap:
+          envConfigmaps:
             - envs
           envsFromSecret:
             - secretEnvs
