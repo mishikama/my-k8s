@@ -2,24 +2,10 @@ envs:
   DB_HOST: postgres-postgresql
   DB_PORT: "5432"
   DB_USERNAME: postgres
-  name: DB_PASSWORD
+  RAILS_DEVELOPMENT_HOSTS: ""
 
 secretEnvs:
   postgres-postgresql: postgres-password
-
-hooks:
-  migrate:
-    - name: migrate
-      containers:
-        command:
-          - bin/rails
-        args:
-          - db:setup
-          - db:migrate
-        envConfigmaps:
-          - envs
-        envSecrets:
-          - secretEnvs
 
 deployments:
   web-app:
