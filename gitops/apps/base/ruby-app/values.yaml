@@ -19,6 +19,11 @@ deployments:
     containers:
       - name: web-app
         imagePullPolicy: Always
+        env:
+          valueFrom:
+            secretKeyRef:
+              name: postgres-postgresql
+              key: postgres-password
         envConfigmaps:
           - envs
         ports:
