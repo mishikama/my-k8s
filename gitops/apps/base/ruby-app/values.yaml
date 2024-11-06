@@ -2,6 +2,11 @@ envs:
   DB_HOST: postgres-postgresql
   DB_PORT: "5432"
   DB_USERNAME: postgres
+  DB_PASSWORD:
+    valueFrom:
+      secretKeyRef:
+        name: postgres-postgresql
+        key: postgres-password
 
 defaultImage: mishila/mylab-ruby-app
 defaultImageTag: latest
@@ -16,12 +21,6 @@ deployments:
       app: web-app
     containers:
       - name: web-app
-        env:
-          - name: DB_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: postgres-postgresql
-                key: postgres-password
         envConfigmaps:
           - envs
         ports:
