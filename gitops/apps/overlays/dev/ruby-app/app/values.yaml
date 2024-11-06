@@ -1,5 +1,5 @@
 envs:
-  RAILS_DEVELOPMENT_HOSTS: "51.250.34.111.ip.io"
+  RAILS_DEVELOPMENT_HOSTS: "51.250.34.111.nip.io"
 
 deployments:
   web-app:
@@ -10,7 +10,7 @@ deployments:
           - envs
 
 ingresses:
-  51.250.34.111.ip.io:
+  51.250.34.111.nip.io:
     certManager:
       issuerType: cluster-issuer
       issuerName: letsencrypt
