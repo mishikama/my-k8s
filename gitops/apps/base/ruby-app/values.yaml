@@ -2,7 +2,6 @@ envs:
   DB_HOST: postgres-postgresql
   DB_PORT: "5432"
   DB_USERNAME: postgres
-  DB_PASSWORD:
 
 defaultImage: mishila/mylab-ruby-app
 defaultImageTag: latest
