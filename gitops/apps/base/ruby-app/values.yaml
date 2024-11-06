@@ -3,9 +3,6 @@ envs:
   DB_PORT: "5432"
   DB_USERNAME: postgres
 
-# secretEnvs:
-#   postgres-postgresql: postgres-password
-
 defaultImage: mishila/mylab-ruby-app
 defaultImageTag: latest
 
