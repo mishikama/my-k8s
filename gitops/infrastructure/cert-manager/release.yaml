@@ -3,13 +3,14 @@ kind: HelmRelease
 metadata:
   name: cert-manager
 spec:
-  interval: 5m
-  timeout: 5m
+  interval: 10m
+  timeout: 15m
+  releaseName: cert-manager
   chart:
     spec:
       chart: cert-manager
       version: 1.16.*
       sourceRef:
         kind: HelmRepository
-        name: cert-manager
-      interval: 5m
+        name: jetstack
+      interval: 10m
