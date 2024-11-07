@@ -1,0 +1,12 @@
+apiVersion: fluxcd.controlplane.io/v1
+kind: FluxInstance
+metadata:
+  name: flux
+  namespace: flux-system
+spec:
+  sync:
+    kind: GitRepository
+    url: https://github.com/mishikama/my-k8s
+    ref: refs/heads/main
+    path: gitops/clusters/cluster/
+    pullSecret: flux-system
