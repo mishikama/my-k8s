@@ -14,3 +14,6 @@ spec:
         kind: HelmRepository
         name: ingress-nginx
       interval: 10m
+  valuesFrom:
+    - kind: ConfigMap
+      name: ingress-nginx-values

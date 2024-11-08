@@ -1,12 +1,12 @@
 envs:
-  RAILS_DEVELOPMENT_HOSTS: "ruby-84-252-134-95.nip.io"
+  RAILS_DEVELOPMENT_HOSTS: "ruby-51-250-109-184.nip.io"
 
 deployments:
   web-app:
     replicas: 2
 
 ingresses:
-  ruby-84-252-134-95.nip.io:
+  ruby-51-250-109-184.nip.io:
     certManager:
       issuerType: cluster-issuer
       issuerName: letsencrypt
