@@ -6,4 +6,4 @@ resources:
   - repository.yaml
   - release.yaml
   - acme-issuer.yaml
-  - acme-issuer-staging.yaml
+  - acme-issuer-dev.yaml
