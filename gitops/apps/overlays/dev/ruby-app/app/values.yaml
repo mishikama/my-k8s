@@ -7,6 +7,7 @@ deployments:
 
 ingresses:
   ruby-51-250-109-184.nip.io:
+    tlsName: ruby-app-tls-cert
     certManager:
       issuerType: cluster-issuer
       issuerName: letsencrypt
