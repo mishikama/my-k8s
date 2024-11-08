@@ -9,7 +9,6 @@ ingresses:
   ruby-51-250-109-184.nip.io:
     certManager:
       issuerType: ClusterIssuer
-      issuerName: letsencrypt-dev
     ingressClassName: nginx
     hosts:
       - paths:
