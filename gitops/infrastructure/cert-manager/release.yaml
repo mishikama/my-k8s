@@ -14,3 +14,6 @@ spec:
         kind: HelmRepository
         name: jetstack
       interval: 10m
+  valuesFrom:
+    - kind: ConfigMap
+      name: cert-manager-values
