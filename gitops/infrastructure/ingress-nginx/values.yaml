@@ -1,2 +1,3 @@
-service:
-  loadBalancerIP: 51.250.109.184
+controller:
+  service:
+    loadBalancerIP: 51.250.109.184
