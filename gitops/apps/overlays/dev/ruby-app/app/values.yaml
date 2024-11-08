@@ -8,7 +8,9 @@ deployments:
 ingresses:
   ruby-51-250-109-184.nip.io:
     annotations:
-      cert-manager.io/cluster-issuer: letsencrypt-dev-issuer-account-key
+      nginx.ingress.kubernetes.io/ssl-redirect: "true"
+      nginx.ingress.kubernetes.io/proxy-body-size: "128m"
+      acme.cert-manager.io/http01-edit-in-place: "true"
     certManager:
       issuerType: cluster-issuer
       issuerName: letsencrypt
