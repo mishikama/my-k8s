@@ -4,9 +4,9 @@ metadata:
   name: letsencrypt-dev
 spec:
   acme:
-    server: https://acme-v02.api.letsencrypt.org/directory
+    server: https://acme-staging-v02.api.letsencrypt.org/directory
     privateKeySecretRef:
-      name: letsencrypt-dev
+      name: letsencrypt-issuer-dev-key
     solvers:
       - http01:
           ingress:
