@@ -7,9 +7,8 @@ deployments:
 
 ingresses:
   ruby-51-250-109-184.nip.io:
-    tlsName: &sec ruby-app-tls-cert
     annotations:
-      cert-manager.io/cluster-issuer: *sec
+      cert-manager.io/cluster-issuer: letsencrypt-dev-issuer-account-key
     certManager:
       issuerType: cluster-issuer
       issuerName: letsencrypt
