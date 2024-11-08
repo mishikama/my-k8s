@@ -6,8 +6,8 @@ spec:
   acme:
     server: https://acme-v02.api.letsencrypt.org/directory
     privateKeySecretRef:
-      name: letsencrypt-dev-issuer-account-key
+      name: letsencrypt-dev
     solvers:
       - http01:
           ingress:
-            ingressClassName: nginx
+            class: nginx

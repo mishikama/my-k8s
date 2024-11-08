@@ -7,11 +7,11 @@ deployments:
 
 ingresses:
   ruby-51-250-109-184.nip.io:
-    certManager:
-      issuerType: ClusterIssuer
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt-prod
     ingressClassName: nginx
     hosts:
       - paths:
           - serviceName: web-app
-            servicePort: 3000
+            servicePort: http
             path: "/"
