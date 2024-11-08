@@ -7,9 +7,9 @@ deployments:
 
 ingresses:
   ruby-84-252-134-95.nip.io:
-    certManager:
-      issuerType: cluster-issuer
-      issuerName: letsencrypt-dev
+    # certManager:
+    #   issuerType: cluster-issuer
+    #   issuerName: letsencrypt-dev
     ingressClassName: nginx
     hosts:
       - paths:
