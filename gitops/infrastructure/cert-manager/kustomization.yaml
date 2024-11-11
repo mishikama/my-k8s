@@ -5,8 +5,8 @@ resources:
   - namespace.yaml
   - repository.yaml
   - release.yaml
-  - acme-issuer.yaml
-  - acme-issuer-dev.yaml
+  # - acme-issuer.yaml
+  # - acme-issuer-dev.yaml
 configMapGenerator:
   - name: cert-manager-values
     files:
