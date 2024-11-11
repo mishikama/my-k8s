@@ -4,9 +4,3 @@ namespace: cert-manager
 resources:
   - namespace.yaml
   - acme-issuer-dev.yaml
-configMapGenerator:
-  - name: cert-manager-values
-    files:
-      - values.yaml=values.yaml
-configurations:
-  - kustomizeconfig.yaml
