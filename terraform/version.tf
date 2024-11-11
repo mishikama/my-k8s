@@ -4,6 +4,10 @@ terraform {
       source  = "yandex-cloud/yandex"
       version = "0.129.0"
     }
+    kubernetes = {
+      source  = "hashicorp/kubernetes"
+      version = ">= 2.27"
+    }
     helm = {
       source  = "hashicorp/helm"
       version = "2.16.1"

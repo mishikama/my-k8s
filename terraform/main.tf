@@ -47,17 +47,31 @@ module "kube" {
   }
 }
 
-resource "helm_release" "flux_operator" {
-  depends_on = [kubernetes_namespace.flux_system]
 
-  name       = "flux-operator"
-  namespace  = "flux-system"
-  repository = "oci://ghcr.io/controlplaneio-fluxcd/charts"
-  chart      = "flux-operator"
-  wait       = true
+resource "helm_release" "flux_operator" {
+  name             = "flux-operator"
+  namespace        = "flux-system"
+  repository       = "oci://ghcr.io/controlplaneio-fluxcd/charts"
+  chart            = "flux-operator"
+  create_namespace = true
 }
 
-// Configure the Flux instance.
+resource "kubernetes_secret" "git_auth" {
+  depends_on = [helm_release.flux_operator]
+
+  metadata {
+    name      = "flux-system"
+    namespace = "flux-system"
+  }
+
+  data = {
+    username = "git"
+    password = var.git_token
+  }
+
+  type = "Opaque"
+}
+
 resource "helm_release" "flux_instance" {
   depends_on = [helm_release.flux_operator]
 
@@ -66,7 +80,27 @@ resource "helm_release" "flux_instance" {
   repository = "oci://ghcr.io/controlplaneio-fluxcd/charts"
   chart      = "flux-instance"
 
-  // Configure the Flux components and kustomize patches.
+  set {
+    name  = "instance.sync.kind"
+    value = "GitRepository"
+  }
+  set {
+    name  = "instance.sync.url"
+    value = var.flux.git_url
+  }
+  set {
+    name  = "instance.sync.path"
+    value = var.flux.git_path
+  }
+  set {
+    name  = "instance.sync.ref"
+    value = var.flux.git_ref
+  }
+  set {
+    name  = "instance.sync.pullSecret"
+    value = var.git_token != "" ? "flux-system" : ""
+  }
+
   values = [
     file("values/components.yaml")
   ]
