@@ -3,8 +3,11 @@ kind: Kustomization
 metadata:
   name: &app ruby-app
 spec:
-  dependsOn:
-    - name: postgres-dev
+  healthChecks:
+    - apiVersion: helm.toolkit.fluxcd.io/v2
+      kind: HelmRelease
+      name: postgres
+      namespace: dev
   targetNamespace: dev
   commonMetadata:
     labels:

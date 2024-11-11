@@ -47,8 +47,27 @@ module "kube" {
   }
 }
 
-resource "helm_release" "flux" {
+resource "helm_release" "flux_operator" {
+  depends_on = [kubernetes_namespace.flux_system]
+
   name       = "flux-operator"
-  repository = "oci://ghcr.io/controlplaneio-fluxcd/charts/"
+  namespace  = "flux-system"
+  repository = "oci://ghcr.io/controlplaneio-fluxcd/charts"
   chart      = "flux-operator"
+  wait       = true
+}
+
+// Configure the Flux instance.
+resource "helm_release" "flux_instance" {
+  depends_on = [helm_release.flux_operator]
+
+  name       = "flux"
+  namespace  = "flux-system"
+  repository = "oci://ghcr.io/controlplaneio-fluxcd/charts"
+  chart      = "flux-instance"
+
+  // Configure the Flux components and kustomize patches.
+  values = [
+    file("values/components.yaml")
+  ]
 }

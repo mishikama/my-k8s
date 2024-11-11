@@ -5,8 +5,13 @@ metadata:
   namespace: flux-system
 spec:
   interval: 5m
-  path: ./gitops/infrastructure/issuers
+  path: ./gitops/infrastructure/cert-manager-issuers
   prune: true
   sourceRef:
     kind: GitRepository
     name: flux-system
+  healthChecks:
+    - apiVersion: apps/v1
+      kind: Deployment
+      name: cert-manager
+      namespace: cert-manager

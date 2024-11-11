@@ -13,7 +13,6 @@ ingresses:
       - hosts:
           - "ruby-51-250-109-184.nip.io"
         secretName: letsencrypt-dev
-
     ingressClassName: nginx
     hosts:
       - paths:
