@@ -46,11 +46,6 @@ module "kube" {
   }
 }
 
-provider "kubernetes" {
-  host                   = module.kube.external_v4_endpoint
-  cluster_ca_certificate = module.kube.cluster_ca_certificate
-}
-
 resource "kubernetes_namespace" "flux_system" {
   metadata {
     name = "flux-system"
@@ -78,13 +73,6 @@ resource "kubernetes_secret" "git_auth" {
   }
 
   type = "Opaque"
-}
-
-provider "helm" {
-  kubernetes {
-    host                   = module.kube.external_v4_endpoint
-    cluster_ca_certificate = module.kube.cluster_ca_certificate
-  }
 }
 
 resource "helm_release" "flux_operator" {
