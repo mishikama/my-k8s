@@ -8,11 +8,11 @@ deployments:
 ingresses:
   ruby-51-250-109-184.nip.io:
     annotations:
-      cert-manager.io/cluster-issuer: letsencrypt-dev
+      cert-manager.io/cluster-issuer: letsencrypt-dev1
     extraTls:
       - hosts:
           - "ruby-51-250-109-184.nip.io"
-        secretName: letsencrypt-dev-crt
+        secretName: letsencrypt-dev-crt1
     ingressClassName: nginx
     hosts:
       - paths:
