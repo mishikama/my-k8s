@@ -3,14 +3,19 @@ variable "zone" {
 }
 
 variable "folder_id" {
-  description = "Yandex Cloud Folder ID where resources will be created"
-  default     = null
+  default = null
 }
 
 variable "network" {
   default = {
     subnets = ["10.1.0.0/16"]
   }
+}
+
+variable "git_username" {
+  sensitive = true
+  type      = string
+  default   = ""
 }
 
 variable "git_token" {
@@ -21,7 +26,7 @@ variable "git_token" {
 
 variable "git_url" {
   type    = string
-  default = null
+  default = "https://github.com/mishikama/my-k8s"
 }
 
 variable "git_ref" {
@@ -31,5 +36,5 @@ variable "git_ref" {
 
 variable "git_path" {
   type    = string
-  default = null
+  default = "gitops/clusters/cluster"
 }

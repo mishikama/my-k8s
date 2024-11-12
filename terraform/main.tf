@@ -20,8 +20,7 @@ module "network" {
 }
 
 module "kube" {
-  source = "git::https://github.com/terraform-yc-modules/terraform-yc-kubernetes/"
-
+  source     = "git::https://github.com/terraform-yc-modules/terraform-yc-kubernetes/"
   network_id = module.network.vpc_id
 
   master_locations = [
@@ -47,8 +46,49 @@ module "kube" {
   }
 }
 
+provider "kubernetes" {
+  host                   = module.kube.external_v4_endpoint
+  cluster_ca_certificate = module.kube.cluster_ca_certificate
+}
+
+resource "kubernetes_namespace" "flux_system" {
+  metadata {
+    name = "flux-system"
+  }
+
+  lifecycle {
+    ignore_changes = [metadata]
+  }
+}
+
+resource "kubernetes_secret" "git_auth" {
+  depends_on = [
+    module.kube,
+    kubernetes_namespace.flux_system
+  ]
+
+  metadata {
+    name      = "git-auth"
+    namespace = "flux-system"
+  }
+
+  data = {
+    username = var.git_username
+    password = var.git_token
+  }
+
+  type = "Opaque"
+}
+
+provider "helm" {
+  kubernetes {
+    host                   = module.kube.external_v4_endpoint
+    cluster_ca_certificate = module.kube.cluster_ca_certificate
+  }
+}
 
 resource "helm_release" "flux_operator" {
+  depends_on       = [module.kube]
   name             = "flux-operator"
   namespace        = "flux-system"
   repository       = "oci://ghcr.io/controlplaneio-fluxcd/charts"
@@ -56,24 +96,11 @@ resource "helm_release" "flux_operator" {
   create_namespace = true
 }
 
-resource "kubernetes_secret" "git_auth" {
-  depends_on = [helm_release.flux_operator]
-
-  metadata {
-    name      = "flux-system"
-    namespace = "flux-system"
-  }
-
-  data = {
-    username = "git"
-    password = var.git_token
-  }
-
-  type = "Opaque"
-}
-
 resource "helm_release" "flux_instance" {
-  depends_on = [helm_release.flux_operator]
+  depends_on = [
+    helm_release.flux_operator,
+    kubernetes_secret.git_auth
+  ]
 
   name       = "flux"
   namespace  = "flux-system"
@@ -86,19 +113,19 @@ resource "helm_release" "flux_instance" {
   }
   set {
     name  = "instance.sync.url"
-    value = var.flux.git_url
+    value = var.git_url
   }
   set {
     name  = "instance.sync.path"
-    value = var.flux.git_path
+    value = var.git_path
   }
   set {
     name  = "instance.sync.ref"
-    value = var.flux.git_ref
+    value = var.git_ref
   }
   set {
     name  = "instance.sync.pullSecret"
-    value = var.git_token != "" ? "flux-system" : ""
+    value = (var.git_username != "" && var.git_token != "") ? "git-auth" : ""
   }
 
   values = [
