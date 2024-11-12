@@ -9,6 +9,11 @@ spec:
       app.kubernetes.io/name: *app
   path: ./gitops/apps/overlays/dev/postgres/app
   prune: true
+  # healthChecks:
+  #   - apiVersion: apps/v1
+  #     kind: Deployment
+  #     name: cert-manager
+  #     namespace: cert-manager
   sourceRef:
     kind: GitRepository
     name: flux-system
