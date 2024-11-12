@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: Yandex-cloud
+        working-directory: terraform
     env:
       YC_CLOUD_ID: ${{ secrets.YC_CLOUD_ID }}
       YC_FOLDER_ID: ${{ secrets.YC_FOLDER_ID }}
@@ -42,15 +42,17 @@ jobs:
           ACCESS_KEY: ${{ secrets.YC_KEY_ID }}
           SECRET_KEY: ${{ secrets.YC_PRIVATE_KEY }}
           BUCKET_NAME: ${{ secrets.YC_BUCKET_NAME }}
-        run: terraform init -backend-config="access_key=$ACCESS_KEY" -backend-config="secret_key=$SECRET_KEY" -backend-config="bucket=$BUCKET_NAME"
+        run: |
+          terraform init \
+            -backend-config="access_key=$ACCESS_KEY" \
+            -backend-config="secret_key=$SECRET_KEY" \
+            -backend-config="bucket=$BUCKET_NAME"
 
       - name: Terraform Validate
         id: validate
         run: terraform validate -no-color
 
       - name: Terraform Plan
-        env:
-          YC_TOKEN: ${{ steps.issue-iam-token.outputs.token }}
         if: github.event_name == 'pull_request'
         id: plan
         run: terraform plan
@@ -59,6 +61,13 @@ jobs:
       - name: Terraform Apply
         env:
           YC_TOKEN: ${{ steps.issue-iam-token.outputs.token }}
-        # if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        if: false
-        run: terraform apply -auto-approve -input=false
+          KUBE_TOKEN: ${{ steps.issue-iam-token.outputs.token }}
+          #ADD GITHUB_TOKEN
+          # -var git_token=$GITHUB_TOKEN \
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        run: |
+          terraform apply \
+            -var git_username=$GITHUB_ACTOR \
+            -var git_url="https://github.com/${{ github.repository }}" \
+            -auto-approve \
+            -input=false
