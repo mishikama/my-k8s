@@ -8,7 +8,7 @@ on:
 
 jobs:
   deploy:
-    if: false
+    # if: false
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -33,7 +33,6 @@ jobs:
       - name: Terraform fmt
         id: fmt
         run: terraform fmt -check
-        continue-on-error: true
 
       - name: Terraform Init
         id: init
@@ -56,18 +55,13 @@ jobs:
         if: github.event_name == 'pull_request'
         id: plan
         run: terraform plan
-        continue-on-error: true
 
       - name: Terraform Apply
         env:
           YC_TOKEN: ${{ steps.issue-iam-token.outputs.token }}
           KUBE_TOKEN: ${{ steps.issue-iam-token.outputs.token }}
-          #ADD GITHUB_TOKEN
-          # -var git_token=$GITHUB_TOKEN \
+          TF_VAR_git_token: ${{ secrets.GIT_TOKEN }}
+          TF_VAR_git_url: ${{ secrets.GIT_URL }}
+          TF_VAR_git_username: ${{ secrets.GIT_USERNAME }}
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        run: |
-          terraform apply \
-            -var git_username=$GITHUB_ACTOR \
-            -var git_url="https://github.com/${{ github.repository }}" \
-            -auto-approve \
-            -input=false
+        run: terraform apply -auto-approve -input=false
