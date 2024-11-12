@@ -26,7 +26,7 @@ variable "git_token" {
 
 variable "git_url" {
   type    = string
-  default = ""
+  default = "https://github.com/mishikama/my-k8s"
 }
 
 variable "git_ref" {
