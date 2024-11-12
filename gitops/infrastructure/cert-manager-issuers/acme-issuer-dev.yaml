@@ -1,12 +1,12 @@
 apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
 metadata:
-  name: letsencrypt-dev1
+  name: letsencrypt-dev
 spec:
   acme:
     server: https://acme-v02.api.letsencrypt.org/directory
     privateKeySecretRef:
-      name: letsencrypt-dev-key1
+      name: letsencrypt-dev-key
     solvers:
       - http01:
           ingress:
