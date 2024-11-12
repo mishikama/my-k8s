@@ -6,7 +6,7 @@ spec:
   acme:
     server: https://acme-v02.api.letsencrypt.org/directory
     privateKeySecretRef:
-      name: letsencrypt-dev-key
+      name: letsencrypt-dev-key1
     solvers:
       - http01:
           ingress:
