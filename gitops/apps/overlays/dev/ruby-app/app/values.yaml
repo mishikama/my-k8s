@@ -9,9 +9,9 @@ ingresses:
   ruby-51-250-109-184.nip.io:
     annotations:
       cert-manager.io/cluster-issuer: letsencrypt-dev
-    # extraTls:
-    #   - hosts:
-    #       - "ruby-51-250-109-184.nip.io"
+    extraTls:
+      - hosts:
+          - "ruby-51-250-109-184.nip.io"
     #     secretName: letsencrypt-dev
     ingressClassName: nginx
     hosts:
