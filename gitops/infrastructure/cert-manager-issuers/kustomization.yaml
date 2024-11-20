@@ -4,3 +4,4 @@ namespace: cert-manager
 resources:
   - namespace.yaml
   - acme-issuer-dev.yaml
+  - acme-issuer-stage.yaml
