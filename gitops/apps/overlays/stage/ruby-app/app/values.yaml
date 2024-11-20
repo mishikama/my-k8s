@@ -1,18 +1,18 @@
 envs:
-  RAILS_DEVELOPMENT_HOSTS: "dev-51-250-109-184.nip.io"
+  RAILS_DEVELOPMENT_HOSTS: "stage-51-250-109-184.nip.io"
 
 deployments:
   web-app:
     replicas: 2
 
 ingresses:
-  dev-51-250-109-184.nip.io:
+  stage-51-250-109-184.nip.io:
     annotations:
-      cert-manager.io/cluster-issuer: letsencrypt-dev
+      cert-manager.io/cluster-issuer: letsencrypt-stage
     extraTls:
       - hosts:
-          - "dev-51-250-109-184.nip.io"
-        secretName: letsencrypt-dev-crt
+          - "stage-51-250-109-184.nip.io"
+        secretName: letsencrypt-stage-crt
     ingressClassName: nginx
     hosts:
       - paths:
