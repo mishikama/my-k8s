@@ -4,4 +4,5 @@ metadata:
   name: postgresql
 spec:
   interval: 5m
-  url: https://charts.bitnami.com/bitnami
+  type: "oci"
+  url: oci://registry-1.docker.io/bitnamicharts
