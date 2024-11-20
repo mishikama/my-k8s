@@ -13,9 +13,8 @@ variable "network" {
 }
 
 variable "git_username" {
-  sensitive = true
-  type      = string
-  default   = ""
+  type    = string
+  default = "mishikama"
 }
 
 variable "git_token" {
@@ -37,4 +36,11 @@ variable "git_ref" {
 variable "git_path" {
   type    = string
   default = "gitops/clusters/cluster"
+}
+
+variable "namespaces" {
+  type = list(string)
+  default = [
+    "flux-system"
+  ]
 }

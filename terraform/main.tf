@@ -46,9 +46,11 @@ module "kube" {
   }
 }
 
-resource "kubernetes_namespace" "flux_system" {
+resource "kubernetes_namespace" "this" {
+  for_each = toset(var.namespaces)
+
   metadata {
-    name = "flux-system"
+    name = each.key
   }
 
   lifecycle {
@@ -59,7 +61,7 @@ resource "kubernetes_namespace" "flux_system" {
 resource "kubernetes_secret" "git_auth" {
   depends_on = [
     module.kube,
-    kubernetes_namespace.flux_system
+    kubernetes_namespace.this
   ]
 
   metadata {
