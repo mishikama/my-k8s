@@ -47,7 +47,8 @@ module "kube" {
 }
 
 resource "kubernetes_namespace" "this" {
-  for_each = toset(var.namespaces)
+  depends_on = [module.kube]
+  for_each   = toset(var.namespaces)
 
   metadata {
     name = each.key
@@ -59,10 +60,7 @@ resource "kubernetes_namespace" "this" {
 }
 
 resource "kubernetes_secret" "git_auth" {
-  depends_on = [
-    module.kube,
-    kubernetes_namespace.this
-  ]
+  depends_on = [kubernetes_namespace.this]
 
   metadata {
     name      = "git-auth"
@@ -78,7 +76,7 @@ resource "kubernetes_secret" "git_auth" {
 }
 
 resource "helm_release" "flux_operator" {
-  depends_on       = [module.kube]
+  depends_on       = [kubernetes_secret.git_auth]
   name             = "flux-operator"
   namespace        = "flux-system"
   repository       = "oci://ghcr.io/controlplaneio-fluxcd/charts"
@@ -87,10 +85,7 @@ resource "helm_release" "flux_operator" {
 }
 
 resource "helm_release" "flux_instance" {
-  depends_on = [
-    helm_release.flux_operator,
-    kubernetes_secret.git_auth
-  ]
+  depends_on = [helm_release.flux_operator]
 
   name       = "flux"
   namespace  = "flux-system"
