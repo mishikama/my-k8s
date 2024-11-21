@@ -1,0 +1,12 @@
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta2
+kind: Kustomization
+metadata:
+  name: images-updater
+spec:
+  interval: 10m0s
+  path: ./gitops/services/overlays/dev/images-updater
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+    namespace: flux-system
