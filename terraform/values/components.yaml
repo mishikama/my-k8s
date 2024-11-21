@@ -4,3 +4,5 @@ instance:
     - kustomize-controller
     - helm-controller
     - notification-controller
+    - image-automation-controller
+    - image-reflector-controller
